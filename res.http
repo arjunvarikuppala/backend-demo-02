@@ -1,0 +1,62 @@
+
+### read all users
+GET  http://localhost:4000/user-api/users
+
+
+### create a user 
+
+POST  http://localhost:4000/user-api/users
+content-type: application/json
+
+{
+    "username":"nandhu",
+    "email":"arjunvarikuppal@gamil.com",
+    "password":"password",
+    "age":32
+
+}
+### update a user
+
+PUT http://localhost:4000/user-api/users/6983931cb013164563ceb950
+Content-Type: application/json
+
+{
+    
+    "username":"thrishool",
+    "email":"arjunvarikuppal@gamil.com",
+    "password":"nandhu@223",
+    "age":32
+   
+
+}
+
+
+### Products - read all
+GET  http://localhost:4000/product-api/products
+
+
+### Products - create
+POST  http://localhost:4000/product-api/products
+Content-Type: application/json
+
+{
+    "name": "washing machine",
+    "description": "Test product",
+    "price": 20000,
+    "inStock": true
+}
+
+### Products - get by id
+GET http://localhost:4000/product-api/products
+
+### Products - update
+PUT http://localhost:4000/product-api/products/698396757eae6808c11b7ebf
+Content-Type: application/json
+
+{
+    "price": 24.99,
+    "inStock": false
+}
+
+### Products - delete
+DELETE http://localhost:4000/product-api/products/698396b97eae6808c11b7ec3
