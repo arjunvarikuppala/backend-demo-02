@@ -1,0 +1,392 @@
+## Prerequisites
+
+Before running this backend project, install the required backend development tools.
+
+---
+
+## Node.js Installation
+
+Node.js is a JavaScript runtime environment used to execute backend applications outside the browser.
+
+### Step 1: Download Node.js
+
+Download Node.js from the official website:
+
+https://nodejs.org
+
+Install the **LTS (Long Term Support)** version.
+
+### Step 2: Install Node.js
+
+Run the installer and follow the default setup.
+
+Make sure:
+
+- Add to PATH is enabled
+- Default installation settings are selected
+
+### Step 3: Verify Installation
+
+Check Node.js version:
+
+```bash
+node -v
+```
+
+Example:
+
+```bash
+v22.x.x
+```
+
+Check npm version:
+
+```bash
+npm -v
+```
+
+Example:
+
+```bash
+10.x.x
+```
+
+npm is installed automatically with Node.js and is used for package management.
+
+---
+
+## Express.js and Backend Package Installation
+
+Express.js is a backend framework used to build APIs and manage routing.
+
+Initialize Node project if required:
+
+```bash
+npm init -y
+```
+
+Install Express:
+
+```bash
+npm install express
+```
+
+Install commonly used backend packages:
+
+```bash
+npm install mongoose dotenv cors bcryptjs jsonwebtoken
+```
+
+Install nodemon for development:
+
+```bash
+npm install nodemon --save-dev
+```
+
+Package explanation:
+
+| Package | Purpose |
+|----------|---------|
+| express | Backend framework |
+| mongoose | MongoDB database interaction |
+| dotenv | Environment variable configuration |
+| cors | Frontend-backend communication |
+| bcryptjs | Password hashing |
+| jsonwebtoken | JWT authentication |
+| nodemon | Auto restart during development |
+
+---
+
+## Installation and Setup
+
+### Clone Repository
+
+```bash
+git clone https://github.com/arjunvarikuppala/backend-demo-02.git
+```
+
+Move into project folder:
+
+```bash
+cd backend-demo-02
+```
+
+---
+
+### Install Project Dependencies
+
+```bash
+npm install
+```
+
+This installs all dependencies listed inside `package.json`.
+
+---
+
+### Configure Environment Variables
+
+Create `.env` file:
+
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection
+JWT_SECRET=your_secret_key
+```
+
+Environment variable explanation:
+
+| Variable | Purpose |
+|-----------|---------|
+| PORT | Server running port |
+| MONGO_URI | MongoDB Atlas connection string |
+| JWT_SECRET | JWT secret key |
+
+Example:
+
+```env
+PORT=5000
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/database
+JWT_SECRET=mysecretkey
+```
+
+---
+
+## Running Backend Server
+
+Development mode:
+
+```bash
+npm run dev
+```
+
+Production mode:
+
+```bash
+npm start
+```
+
+Direct execution:
+
+```bash
+node server.js
+```
+
+---
+
+## Backend Architecture
+
+The backend follows REST API architecture.
+
+Workflow:
+
+```text
+Client Request → Middleware → Router → Controller → Database → Response
+```
+
+---
+
+## API Routes and CRUD Operations
+
+The backend uses Express Router and RESTful APIs to perform CRUD operations.
+
+CRUD means:
+
+| Operation | Method | Purpose |
+|------------|--------|---------|
+| Create | POST | Add new data |
+| Read | GET | Retrieve data |
+| Update | PUT | Modify existing data |
+| Delete | DELETE | Remove data |
+
+---
+
+## Router Structure
+
+Routes are usually organized inside:
+
+```bash
+routes/
+```
+
+Example:
+
+```bash
+routes/
+├── authRoutes.js
+├── blogRoutes.js
+├── userRoutes.js
+```
+
+Routes are connected inside `server.js` using:
+
+```js
+app.use("/api/auth", authRoutes)
+app.use("/api/blogs", blogRoutes)
+```
+
+---
+
+## Authentication Routes
+
+Base URL:
+
+```bash
+/api/auth
+```
+
+| Method | Route | Operation | Description |
+|---------|-------|------------|-------------|
+| POST | /register | Create | Register new user |
+| POST | /login | Read | Login user |
+| GET | /profile | Read | Get logged-in user |
+
+Example:
+
+```http
+POST /api/auth/register
+```
+
+Creates new user account.
+
+Example:
+
+```http
+POST /api/auth/login
+```
+
+Authenticates user and generates JWT token.
+
+---
+
+## Blog Routes
+
+Base URL:
+
+```bash
+/api/blogs
+```
+
+| Method | Route | Operation | Description |
+|---------|-------|------------|-------------|
+| GET | / | Read | Fetch all blogs |
+| GET | /:id | Read | Fetch single blog |
+| POST | / | Create | Create blog |
+| PUT | /:id | Update | Update blog |
+| DELETE | /:id | Delete | Delete blog |
+
+Examples:
+
+Fetch blogs:
+
+```http
+GET /api/blogs
+```
+
+Create blog:
+
+```http
+POST /api/blogs
+```
+
+Update blog:
+
+```http
+PUT /api/blogs/:id
+```
+
+Delete blog:
+
+```http
+DELETE /api/blogs/:id
+```
+
+---
+
+## Middleware
+
+Middleware processes requests before controller execution.
+
+Common middleware:
+
+| Middleware | Purpose |
+|------------|---------|
+| express.json() | Parse JSON request body |
+| cors() | Enable frontend communication |
+| dotenv.config() | Load environment variables |
+| authMiddleware | Verify JWT token |
+
+Example:
+
+```js
+app.use(express.json())
+app.use(cors())
+```
+
+Protected route example:
+
+```js
+router.post("/", authMiddleware, createBlog)
+```
+
+---
+
+## Database Configuration
+
+MongoDB Atlas is used for cloud database storage.
+
+Connection example:
+
+```js
+mongoose.connect(process.env.MONGO_URI)
+```
+
+Successful connection:
+
+```bash
+MongoDB Connected
+```
+
+---
+
+## API Testing
+
+Backend APIs can be tested using:
+
+- Postman
+- Thunder Client
+- VS Code REST Client
+
+Example:
+
+```http
+GET http://localhost:5000/api/blogs
+```
+
+---
+
+## Troubleshooting
+
+If dependencies fail:
+
+```bash
+npm install
+```
+
+If MongoDB fails:
+
+- Check MONGO_URI
+- Verify Atlas username/password
+- Allow IP access:
+
+```bash
+0.0.0.0/0
+```
+
+If server fails:
+
+Check:
+
+- Missing `.env`
+- Incorrect scripts
+- Package installation issues
+- Syntax errors

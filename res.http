@@ -40,7 +40,7 @@ POST  http://localhost:4000/product-api/products
 Content-Type: application/json
 
 {
-    "name": "washing machine",
+    "name": "washing bar",
     "description": "Test product",
     "price": 20000,
     "inStock": true

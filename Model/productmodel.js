@@ -18,7 +18,7 @@ const ProductSchema = new Schema({
     default: true
   },
   createdBy: {
-    type: Schema.Types.ObjectId,
+    type:Schema.Types.ObjectId,
     ref: 'users'
   }
 }, {

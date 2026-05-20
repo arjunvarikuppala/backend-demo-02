@@ -29,7 +29,12 @@ productApp.get('/products/:id', async (req, res) => {
 // create product
 productApp.post('/products', async (req, res) => {
   try {
-    const newProd = new ProductModel(req.body);
+    const userId = req.body.userId;   // temporarily take from body
+
+    const newProd = new ProductModel({
+      ...req.body,
+      createdBy: userId
+    });
     await newProd.save();
     res.status(201).json({ message: 'product created', payload: newProd });
   } catch (err) {
